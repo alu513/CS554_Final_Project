@@ -4,7 +4,7 @@ const tiersData = require("../data/tiers");
 
 router.get("/", async (req, res) => {
   try {
-    const tiers = await tiersData.getAll();
+    const tiers = await tiersData.getAllTiers();
     res.json(tiers);
   } catch (e) {
     console.log(e);
@@ -60,3 +60,5 @@ router.patch("/edit", async (req, res) => {
   }
   return res.status(200).json(newTierList);
 });
+
+module.exports = router;

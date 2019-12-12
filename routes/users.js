@@ -2,10 +2,10 @@ const express = require("express");
 const router = express.Router();
 const usersData = require("../data/users");
 
-router.get("/", async (req, res) => {
+router.get("/:userId", async (req, res) => {
   try {
-    const json = req.body;
-    const user = await usersData.getUserLikesById(json.userId);
+    const id = req.params.userId;
+    const user = await usersData.getUserById(id);
     res.json(user);
   } catch (e) {
     console.log(e);
@@ -29,3 +29,5 @@ router.post("/", async (req, res) => {
     return res.status(400).send("user post failed 400");
   }
 });
+
+module.exports = router;

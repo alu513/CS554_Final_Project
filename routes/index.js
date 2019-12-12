@@ -1,8 +1,9 @@
-const tierRoutes = require("./users");
-const userRoutes = require("./tiers");
+const tierRoutes = require("./tiers");
+const userRoutes = require("./users");
 
 const constructorMethod = app => {
-  app.use("/", tierRoutes);
+  app.use("/tiers", tierRoutes);
+
   app.use("/users", userRoutes);
 
   app.use("*", (req, res) => {
