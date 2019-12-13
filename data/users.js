@@ -2,18 +2,25 @@ const mongoCollections = require("../config/mongoCollections");
 const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 
-async function createUser(username) {
+async function createUser(username, uid) {
   if (!username) {
     throw "error: argument username does not exist";
   }
   if (typeof username !== "string") {
     throw "error: argument username is not type string";
   }
+  if (!uid) {
+    throw "error: argument uid does not exist";
+  }
+  if (typeof uid !== "string") {
+    throw "error: argument uid is not type string";
+  }
 
   const userCollection = await users();
 
   let newUser = {
     username: username,
+    uid: uid,
     userTiers: [],
     likedTiers: []
   };
