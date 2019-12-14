@@ -3,7 +3,7 @@ const tiers = mongoCollections.tiers;
 const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 
-async function createTierList(creator, tierList) {
+async function createTierList(creator, tierList, title) {
   if (!creator) {
     throw "error: argument creator does not exist";
   }
@@ -19,9 +19,13 @@ async function createTierList(creator, tierList) {
 
   const tierCollection = await tiers();
 
+  let d = new Date();
+
   let newTierList = {
     creator: creator,
     tierList: tierList,
+    title: title,
+    ts: d,
     userLikes: []
   };
 

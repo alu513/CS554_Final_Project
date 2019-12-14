@@ -20,12 +20,14 @@ router.post("/", async (req, res) => {
     typeof json == "object" &&
     json.hasOwnProperty("creator") &&
     json.hasOwnProperty("tierList") &&
-    size == 2
+    json.hasOwnProperty("title") &&
+    size == 3
   ) {
     try {
       let newTierList = await tiersData.createTierList(
         json.creator,
-        json.tierList
+        json.tierList,
+        json.title
       );
       return res.status(200).json(newTierList);
     } catch (e) {
