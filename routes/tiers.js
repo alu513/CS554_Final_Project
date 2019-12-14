@@ -65,7 +65,11 @@ router.patch("/edit", async (req, res) => {
   const json = req.body;
   let newTierList;
   try {
-    newTierList = await tiersData.updateTierList(json.tierId, json.tierList);
+    newTierList = await tiersData.updateTierList(
+      json.tierId,
+      json.tierList,
+      json.title
+    );
   } catch (e) {
     console.log(e);
     return res.status(400).send("tier patch (tier list) failed");

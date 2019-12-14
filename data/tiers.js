@@ -128,11 +128,14 @@ async function changeUserLikes(userId, tierListId) {
   return this.getTierListById(tierListId);
 }
 
-async function updateTierList(tierListId, newTierList) {
+async function updateTierList(tierListId, newTierList, newTitle) {
   if (!tierListId) {
     throw "error: argument tierListId does not exist";
   }
   if (!newTierList) {
+    throw "error: argument newTierList does not exist";
+  }
+  if (!newTitle) {
     throw "error: argument newTierList does not exist";
   }
 
@@ -142,11 +145,11 @@ async function updateTierList(tierListId, newTierList) {
 
   const updateTierLikes = await tierCollection.updateOne(
     { _id: tier._id },
-    { $set: { tierList: newTierList } }
+    { $set: { tierList: newTierList, title: newTitle } }
   );
 
   if (updateTierLikes.modifiedCount === 0) {
-    throw "could not like (Tiers) successfully";
+    throw "could not update (Tiers) successfully";
   }
 
   return this.getTierListById(tierListId);
