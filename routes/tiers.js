@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     res.json(tiers);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).send("animal get failed");
+    res.sendStatus(500).send("tier get failed");
   }
 });
 
