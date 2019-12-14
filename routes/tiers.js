@@ -12,6 +12,16 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const tier = await tiersData.getTierListById(req.params.id);
+    res.json(tier);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500).send("tier get failed");
+  }
+});
+
 router.post("/", async (req, res) => {
   const json = req.body;
   var size = Object.keys(json).length;
