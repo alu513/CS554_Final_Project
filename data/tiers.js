@@ -71,57 +71,33 @@ async function getUserLikesById(id) {
   return tier.userLikes;
 }
 
-async function changeUserLikes(userId, tierListId) {
+async function changeUserLikes(uid, tierListId) {
   if (!tierListId) {
     throw "error: argument tierListId does not exist";
   }
-  if (!userId) {
-    throw "error: argument userId does not exist";
-  }
 
   const tierCollection = await tiers();
-  const userCollection = await users();
   const parsedTierId = ObjectId(tierListId);
-  const parsedUserId = ObjectId(tierListId);
 
   let tier = await tierCollection.findOne({ _id: parsedTierId });
-  let user = await userCollection.findOne({ _id: parsedUserId });
 
-  if (tier.userLikes.includes(userId) === null) {
+  if (tier.userLikes.includes(uid) === null) {
     const updateTierLikes = await tierCollection.updateOne(
       { _id: tier._id },
-      { $push: { userLikes: parsedUserId } }
-    );
-
-    const updateUserLikes = await userCollection.updateOne(
-      { _id: user._id },
-      { $push: { userLikes: parsedTierId } }
+      { $push: { userLikes: uid } }
     );
 
     if (updateTierLikes.modifiedCount === 0) {
       throw "could not like (Tiers) successfully";
     }
-
-    if (updateUserLikes.modifiedCount === 0) {
-      throw "could not like (Users) successfully";
-    }
   } else {
     const updateTierLikes = await tierCollection.updateOne(
       { _id: tier._id },
-      { $pull: { userLikes: parsedUserId } }
-    );
-
-    const updateUserLikes = await userCollection.updateOne(
-      { _id: user._id },
-      { $pull: { userLikes: parsedTierId } }
+      { $pull: { userLikes: uid } }
     );
 
     if (updateTierLikes.modifiedCount === 0) {
       throw "could not unlike (Tiers) successfully";
-    }
-
-    if (updateUserLikes.modifiedCount === 0) {
-      throw "could not unlike (Users) successfully";
     }
   }
 
