@@ -81,7 +81,8 @@ async function changeUserLikes(uid, tierListId) {
 
   let tier = await tierCollection.findOne({ _id: parsedTierId });
 
-  if (tier.userLikes.includes(uid) === null) {
+  console.log(tier.userLikes.includes(uid));
+  if (!tier.userLikes.includes(uid)) {
     const updateTierLikes = await tierCollection.updateOne(
       { _id: tier._id },
       { $push: { userLikes: uid } }
