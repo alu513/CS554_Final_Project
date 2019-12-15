@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     res.json(tiers);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).send("tier get failed");
+    res.status(500).send("tier get failed");
   }
 });
 
@@ -18,7 +18,7 @@ router.get("/:id", async (req, res) => {
     res.json(tier);
   } catch (e) {
     console.log(e);
-    res.sendStatus(500).send("tier get failed");
+    res.status(500).send("tier get failed");
   }
 });
 
