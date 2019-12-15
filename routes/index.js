@@ -1,5 +1,4 @@
 const tierRoutes = require("./tiers");
-const userRoutes = require("./users");
 
 const constructorMethod = app => {
   app.use("/tiers", tierRoutes);
