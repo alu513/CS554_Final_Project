@@ -1,6 +1,5 @@
 const mongoCollections = require("../config/mongoCollections");
 const tiers = mongoCollections.tiers;
-const users = mongoCollections.users;
 const { ObjectId } = require("mongodb");
 
 async function createTierList(creator, tierList, title) {
@@ -81,7 +80,7 @@ async function changeUserLikes(uid, tierListId) {
 
   let tier = await tierCollection.findOne({ _id: parsedTierId });
 
-  console.log(tier.userLikes.includes(uid));
+  //console.log(tier.userLikes.includes(uid));
   if (!tier.userLikes.includes(uid)) {
     const updateTierLikes = await tierCollection.updateOne(
       { _id: tier._id },
